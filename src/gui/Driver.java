@@ -173,8 +173,8 @@ public class Driver extends Application {
         grid.setVgap(cellSize);
     
         // Loop over the cells in the maze and draw walls
-        for (int row = 0; row < myMaze.rows; row++) {
-            for (int col = 0; col < myMaze.columns; col++) {
+        for (int row = 0; row < myMaze.getRows(); row++) {
+            for (int col = 0; col < myMaze.getColumns(); col++) {
                 Cell cell = myMaze.getCellByIndex(row, col);
 
                 // Draw top wall if it exists ((xstart, ystart), (xend, yend))

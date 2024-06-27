@@ -9,9 +9,9 @@ import java.util.Random;
  * Each cell can be visited or unvisited and has four walls.
  */
 public class Maze {
-    public int rows;
-    public int columns;
-    public Cell[][] maze;
+    private int rows;
+    private int columns;
+    private Cell[][] maze;
 
     /**
      * Constructs a new Maze with the given number of rows and columns.

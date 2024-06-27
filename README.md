@@ -15,20 +15,20 @@ java --module-path lib --add-modules javafx.controls,javafx.fxml src.gui.Driver
 ![UML Class Diagram](./images/UML-class-diagram.png)
 
 # Directory strucutre
-Maze-generator
-│
-├── lib
-│   ├── javafx.controls
-│   └── javafx.fxml
-│
-├── src
-│   ├── gui
-│   │   └── Driver.java
-│   └── objects
-│       └── Cell.java
-│       └── Maze.java
-│
-├── images
-│   └── UML-class-diagram.png
-│
-└── README.md
+Maze-generator<br>
+│<br>
+├── lib<br>
+│   ├── javafx.controls<br>
+│   └── javafx.fxml<br>
+│<br>
+├── src<br>
+│   ├── gui<br>
+│   │   └── Driver.java<br>
+│   └── objects<br>
+│       └── Cell.java<br>
+│       └── Maze.java<br>
+│<br>
+├── images<br>
+│   └── UML-class-diagram.png<br>
+│<br>
+└── README.md<br>

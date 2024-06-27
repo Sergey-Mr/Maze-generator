@@ -5,14 +5,12 @@ package src.objects;
  * Each cell has four walls, coordinates and can be visited or unvisited.
  */
 public class Cell {
+    private int row, column; // coordinates
     private boolean topWall = true;
     private boolean bottomWall = true;
     private boolean leftWall = true;
     private boolean rightWall = true;
-
     private boolean visited = false;
-
-    private int row, column; // coordinates
 
     /**
      * Constructs a new Cell with the given row and column in the maze`s array.

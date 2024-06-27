@@ -2,16 +2,22 @@
 Computer app which generates random solvable mazes
  
 # Launch the app
-1. Navigate to the root folder .../Maze-generator
+1. Navigate to the root folder:
+```bash
+cd Maze-generator/
+```
 2. Compile the application:
 
+```bash
 javac src/objects/*.java
 javac --module-path lib --add-modules javafx.controls,javafx.fxml src/gui/Driver.java
-
+```
 3. Run it:
+```bash
 java --module-path lib --add-modules javafx.controls,javafx.fxml src.gui.Driver
+```
 
-# UML diagram
+# UML Class Diagram
 ![UML Class Diagram](./images/UML-class-diagram.png)
 
 # Directory strucutre

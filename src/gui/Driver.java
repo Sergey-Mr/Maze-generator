@@ -2,10 +2,10 @@ package src.gui;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -16,7 +16,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Line;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import java.util.Stack; 
@@ -60,10 +59,6 @@ public class Driver extends Application {
             }
         });
 
-        // Set padding around the TextField controls
-        rowsInput.setPadding(new Insets(10));
-        colsInput.setPadding(new Insets(10));
-
         // Create a new Button instance
         Button generateButton = new Button();
 
@@ -74,12 +69,29 @@ public class Driver extends Application {
         generateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // Get the number of rows and columns from the input fields
-                int rows = Integer.parseInt(rowsInput.getText());
-                int cols = Integer.parseInt(colsInput.getText());
+                String rowsText = rowsInput.getText();
+                String colsText = colsInput.getText();
+                
+                // Check if the inputs are empty or zero
+                if (rowsText.isEmpty() || colsText.isEmpty() || rowsText.equals("0") || colsText.equals("0")) {
+                    // Show a warning
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please enter numbers greater than 0 to generate the maze!");
+                
+                    alert.showAndWait();
+                }
+                else{
+                    // Get the number of rows and columns from the input fields
+                    int rows = Integer.parseInt(rowsInput.getText());
+                    int cols = Integer.parseInt(colsInput.getText());
+    
+                    // Generate a new maze
+                    generateMaze(rows, cols, mazePane);
+                }
 
-                // Generate a new maze
-                generateMaze(rows, cols, mazePane);
+
             }
         });
 
@@ -139,7 +151,6 @@ public class Driver extends Application {
     
         // Create and configure the GridPane
         GridPane grid = new GridPane();
-        //double cellSize = 20.0;
         double cellSize = Math.min(root.getWidth() / cols, (root.getHeight()-20) / rows);
         grid.setHgap(cellSize);
         grid.setVgap(cellSize);
@@ -150,12 +161,6 @@ public class Driver extends Application {
                 Cell cell = myMaze.getCellByIndex(row, col);
                 Rectangle rect = new Rectangle(cellSize, cellSize);
                 rect.setFill(Color.TRANSPARENT);
-    
-                //if (cell.isVisited()) {
-                //    rect.setFill(Color.WHITE);
-                //} else {
-                //    rect.setFill(Color.BLACK);
-                //}
     
                 // Draw walls
                 if (cell.hasTopWall()) {
@@ -185,10 +190,6 @@ public class Driver extends Application {
     
         // Add the GridPane to the root node of the scene
         root.getChildren().add(grid);
-
-        // Center the maze in the StackPane
-        // root.setLayoutX((root.getWidth() - myMaze.columns * cellSize) / 2);
-        // root.setLayoutY((root.getHeight() - myMaze.rows * cellSize) / 2);
     }
 
 

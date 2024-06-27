@@ -2,6 +2,7 @@ package src.gui;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -45,6 +46,8 @@ public class Driver extends Application {
         
         // Add spacing between every element of the control box
         controlBox.setSpacing(10);
+
+        //mazePane.setPadding(new Insets(0, 0, 0, 10));
 
         // Labels for rows and columns inputs
         Label rowsLabel = new Label("Enter number of rows");
@@ -104,8 +107,12 @@ public class Driver extends Application {
         controlBox.getChildren().addAll(rowsLabel, rowsInput, colsLabel, colsInput, generateButton);
         controlBox.setAlignment(Pos.CENTER);
 
+        // Add padding for maze
+        StackPane wrapperPane = new StackPane(mazePane);
+        wrapperPane.setPadding(new Insets(25, 0, 0, 25));
+
         // Add panes to the SplitPane
-        layout.getItems().addAll(mazePane, controlBox);
+        layout.getItems().addAll(wrapperPane, controlBox);
 
         // Set the divider position
         layout.setDividerPositions(0.75);
@@ -150,6 +157,10 @@ public class Driver extends Application {
                 stack.pop();
             }
         }
+
+        // Create entrance and exit
+        myMaze.getCellByIndex(0, 0).setLeftWall(false);
+        myMaze.getCellByIndex(myMaze.getRows()-1, myMaze.getColumns()-1).setRightWall(false);
 
         // Draw the maze on a given pane
         drawMaze(myMaze, root, colsIn, rowsIn);

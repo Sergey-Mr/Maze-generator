@@ -2,11 +2,14 @@ package src.gui;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
@@ -32,11 +35,34 @@ public class Driver extends Application {
 
         // Create a new scene with the dimensions of the screen
         Pane mazePane = new Pane();
-        VBox buttonBox = new VBox();
+        VBox controlBox = new VBox();
+        
+        // Add spacing between every element of the control box
+        controlBox.setSpacing(10);
 
-        // Set up parameters of the maze
-        int rows = 50;
-        int cols = 50;
+        // Create new Label instances for rows and columns input
+        Label rowsLabel = new Label("Enter number of rows");
+        Label colsLabel = new Label("Enter number of columns");
+
+        // Create new TextField instances for rows and columns input
+        TextField rowsInput = new TextField();
+        TextField colsInput = new TextField();
+
+        // Add a text property listener to ensure only integers can be entered
+        rowsInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                rowsInput.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        colsInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                colsInput.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        // Set padding around the TextField controls
+        rowsInput.setPadding(new Insets(10));
+        colsInput.setPadding(new Insets(10));
 
         // Create a new Button instance
         Button generateButton = new Button();
@@ -48,17 +74,21 @@ public class Driver extends Application {
         generateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                // Get the number of rows and columns from the input fields
+                int rows = Integer.parseInt(rowsInput.getText());
+                int cols = Integer.parseInt(colsInput.getText());
+
                 // Generate a new maze
                 generateMaze(rows, cols, mazePane);
             }
         });
 
-        // Add the button to the VBox
-        buttonBox.getChildren().add(generateButton);
-        buttonBox.setAlignment(Pos.CENTER);
+        // Add the labels, input fields and button to the VBox
+        controlBox.getChildren().addAll(rowsLabel, rowsInput, colsLabel, colsInput, generateButton);
+        controlBox.setAlignment(Pos.CENTER);
 
         // Add the mazePane and buttonBox to the SplitPane
-        layout.getItems().addAll(mazePane, buttonBox);
+        layout.getItems().addAll(mazePane, controlBox);
 
         // Set the divider position so the buttonBox takes up 1/4 of the width
         layout.setDividerPositions(0.75);
@@ -70,6 +100,7 @@ public class Driver extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
     private void generateMaze(int rowsIn, int colsIn, Pane root){
         // Clear the root Pane
@@ -156,8 +187,8 @@ public class Driver extends Application {
         root.getChildren().add(grid);
 
         // Center the maze in the StackPane
-        root.setLayoutX((root.getWidth() - myMaze.columns * cellSize) / 2);
-        root.setLayoutY((root.getHeight() - myMaze.rows * cellSize) / 2);
+        // root.setLayoutX((root.getWidth() - myMaze.columns * cellSize) / 2);
+        // root.setLayoutY((root.getHeight() - myMaze.rows * cellSize) / 2);
     }
 
 

@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
@@ -25,19 +26,17 @@ public class Driver extends Application {
     public void start(Stage primaryStage) {
         // Get the dimensions of the screen
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        //VBox layout = new VBox();
-        BorderPane layout = new BorderPane();
 
-        //StackPane root = new StackPane();
-        //Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+        // Create a SplitPane layout
+        SplitPane layout = new SplitPane();
+
         // Create a new scene with the dimensions of the screen
-        Pane root = new Pane();
+        Pane mazePane = new Pane();
+        VBox buttonBox = new VBox();
 
         // Set up parameters of the maze
         int rows = 50;
         int cols = 50;
-
-        //generateMaze(rows, cols, root);
 
         // Create a new Button instance
         Button generateButton = new Button();
@@ -50,28 +49,21 @@ public class Driver extends Application {
             @Override
             public void handle(ActionEvent event) {
                 // Generate a new maze
-                generateMaze(rows, cols, root);
+                generateMaze(rows, cols, mazePane);
             }
         });
 
-        // Add the button to the root node
-        // root.getChildren().add(generateButton);
+        // Add the button to the VBox
+        buttonBox.getChildren().add(generateButton);
+        buttonBox.setAlignment(Pos.CENTER);
 
-        // Add the button and the root Pane to the VBox layout
-        //layout.getChildren().addAll(generateButton, root);
+        // Add the mazePane and buttonBox to the SplitPane
+        layout.getItems().addAll(mazePane, buttonBox);
 
-        // Add the button to the top of the BorderPane layout
-        layout.setTop(generateButton);
-        BorderPane.setAlignment(generateButton, Pos.CENTER);
+        // Set the divider position so the buttonBox takes up 1/4 of the width
+        layout.setDividerPositions(0.75);
 
-        // Add the mazePane to the center of the BorderPane layout
-        layout.setCenter(root);
-        
-        //layout.setAlignment(Pos.CENTER);
-
-        //Scene scene = new Scene(new Pane(), screenBounds.getWidth(), screenBounds.getHeight());
-
-        // Create a new scene with the VBox layout as the root
+        // Create a new scene with the SplitPane layout as the root
         Scene scene = new Scene(layout, screenBounds.getWidth(), screenBounds.getHeight());
 
         primaryStage.setTitle("Maze generator");

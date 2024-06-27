@@ -1,5 +1,5 @@
-# Maze-generator
-Computer app which generates random solvable mazes
+# Description
+Java application which generates mazes based on the size wanted by user. The application uses <br>recursive backtracking algorithm</br> in order to generate mazes. 
  
 # Launch instructions
 1. Clone the repository
@@ -42,3 +42,11 @@ Maze-generator<br>
 │   └── UML-class-diagram.png<br>
 │<br>
 └── README.md<br>
+
+# Tehcnologies
+
+This project was created with:
+
+- Java 17.0.11
+- JavaFX SDK 22.0.1
+- Ubuntu 22.04.4 LTS

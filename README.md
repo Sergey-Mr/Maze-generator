@@ -30,8 +30,8 @@ javac --module-path lib --add-modules javafx.controls,javafx.fxml src/gui/Driver
 java --module-path lib --add-modules javafx.controls,javafx.fxml src.gui.Driver
 ```
 
-# UML Class Diagram
 <a id="uml-diagram"></a>
+# UML Class Diagram
 ![UML Class Diagram](./images/UML-class-diagram.png)
 
 # Directory strucutre

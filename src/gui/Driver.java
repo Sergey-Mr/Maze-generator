@@ -21,6 +21,8 @@ public class Driver extends Application {
         // Get the dimensions of the screen
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 
+        //StackPane root = new StackPane();
+        //Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
         // Create a new scene with the dimensions of the screen
         Scene scene = new Scene(new Pane(), screenBounds.getWidth(), screenBounds.getHeight());
         Pane root = (Pane) scene.getRoot();
@@ -54,7 +56,6 @@ public class Driver extends Application {
             }
         }
 
-        printMaze(myMaze);
         drawMaze(myMaze, root);
 
         primaryStage.setTitle("Maze generator");
@@ -62,19 +63,6 @@ public class Driver extends Application {
         primaryStage.show();
     }
 
-    private void printMaze(Maze myMaze) {
-        for (int row = 0; row < myMaze.rows; row++) {
-            for (int col = 0; col < myMaze.columns; col++) {
-                Cell cell = myMaze.getCellByIndex(row, col);
-                if (cell.isVisited()) {
-                    System.out.print("V ");  // V for visited
-                } else {
-                    System.out.print("U ");  // U for unvisited
-                }
-            }
-            System.out.println();  // New line after each row
-        }
-    }
 
     private void drawMaze(Maze myMaze, Pane root) {
         // Clear the previous drawing
@@ -126,6 +114,10 @@ public class Driver extends Application {
     
         // Add the GridPane to the root node of the scene
         root.getChildren().add(grid);
+        
+        // Center the maze in the StackPane
+        root.setLayoutX((root.getWidth() - myMaze.columns * cellSize) / 2);
+        root.setLayoutY((root.getHeight() - myMaze.rows * cellSize) / 2);
     }
 
 

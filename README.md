@@ -1,18 +1,22 @@
 # Maze-generator
 Computer app which generates random solvable mazes
  
-# Launch the app
-1. Navigate to the root folder:
+# Launch instructions
+1. Clone the repository
+```bash
+git clone https://github.com/Sergey-Mr/Maze-generator.git
+```
+2. Navigate to the root folder:
 ```bash
 cd Maze-generator/
 ```
-2. Compile the application:
+3. Compile the application:
 
 ```bash
 javac src/objects/*.java
 javac --module-path lib --add-modules javafx.controls,javafx.fxml src/gui/Driver.java
 ```
-3. Run it:
+4. Run it:
 ```bash
 java --module-path lib --add-modules javafx.controls,javafx.fxml src.gui.Driver
 ```
